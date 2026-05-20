@@ -41,7 +41,7 @@ jobs:
     runs-on: macos-15
     strategy:
       matrix:
-        kernel: [ish, linux]
+        kernel: [ish]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -49,12 +49,10 @@ jobs:
       - name: Install dependencies
         run: |
           brew install llvm lld ninja libarchive meson
-      - name: Clone Linux
-        if: matrix.kernel == 'linux'
-        run: deps/clone-linux.sh
-      - name: Build
-        if: matrix.kernel == 'ish'
-        run: xcodebuild -project iSH.xcodeproj -scheme iSH -arch arm64 -sdk iphoneos CODE_SIGNING_ALLOWED=NO
-      - name: Build
-        if: matrix.kernel == 'linux'
-        run: xcodebuild -project iSH.xcodeproj -scheme iSH+Linux -arch x86_64 -sdk iphonesimulator CODE_SIGNING_ALLOWED=NO
+      - name: Build iOS App
+        run: xcodebuild -project iSH.xcodeproj -scheme iSH-ARM64 -arch arm64 -sdk iphoneos CODE_SIGNING_ALLOWED=NO -derivedDataPath build_output
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ish-arm64-app
+          path: build_output/Build/Products/Debug-iphoneos/

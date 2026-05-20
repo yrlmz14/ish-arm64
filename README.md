@@ -24,7 +24,7 @@
 > - **Agent integration** — `ISHShellExecutor` (Obj-C shell API), `DebugServer` (JSON-RPC over HTTP),
 >   `Native Offload` (bypass emulation for selected binaries), bind mounts for host↔guest file sharing
 > - **iOS-first rootfs** — Alpine 3.21 aarch64 with full `apk` ecosystem and versioned overlay patching
->
+>cicikuş
 > **Performance (ARM64 vs x86, compute-heavy):** C `int_arith_2M` **12x faster**,
 > Python `fib(30)` **9.2x faster**, `sum(1M)` **10.2x faster**, shell `seq+awk 100K` **7.2x faster**.
 >

@@ -56,3 +56,5 @@ jobs:
         with:
           name: ish-arm64-app
           path: build_output/Build/Products/Debug-iphoneos/
+- name: Build iOS App
+        run: xcodebuild -project iSH.xcodeproj -target iSH -arch arm64 -sdk iphoneos CODE_SIGNING_ALLOWED=NO -derivedDataPath build_output
